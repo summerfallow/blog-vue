@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="../js/vue.js"></script>
+    <style>
+        [v-cloak]{display: none}
+        #app{
+            width:350px;
+            background:#eeeeee;
+            padding:30px 50px;
+            margin:30px auto;
+        }
+        #app ul{padding:0}
+        #app ul li{
+            list-style: none;
+        }
+        #app .span1{
+            color:skyblue;
+        }
+        a{
+            text-decoration: line-through;
+        }
+        .xian{
+            color:#ccc;
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak>
+    <h1>任务列表</h1>
+    <p>任务列表：{{arr.length}}；还有：{{number()}}未完成；【<span @click="wanc()" class="span1">完成</span>】</p>
+    <ul>
+        <li v-for="(i,index) in arr" :class="{xian:i.bol}">
+            <input type="checkbox" v-model="i.bol">
+            <span @click="ipt(i)" v-show="!i.inp">{{i.name}}</span>
+            <input type="text" v-show="i.inp" v-model="i.name" @blur="ipt(i)" v-focus="focusStatus">
+        </li>
+    </ul>
+    <input type="text" v-model="name">
+    <button @click="add()">添加</button>
+</div>
+<script>
+    var vm = new Vue({
+         el:"#app",
+         data:{
+              name:this.name,
+              arr:[
+                   {name:"设计",bol:false,inp:false},
+                   {name:"coding",bol:false,inp:false},
+                   {name:"测试",bol:false,inp:false},
+                   {name:"实施",bol:false,inp:false}
+              ],
+              focusStatus:false
+         },
+         methods:{
+              add:function(){
+                   if(this.name==""){
+                        alert("不能为空")
+                   }else{
+                        this.arr.push({name:this.name,bol:false,inp:false})
+                   }
+              },
+              ipt:function(a){
+                   a.inp=!a.inp;
+                   this.focusStatus = !this.focusStatus;
+              },
+              number:function(){
+                   var num = 0;
+                   for(var x = 0;x<this.arr.length;x++){
+                        if(this.arr[x].bol){
+                             num++;
+                        }
+                   }
+                   return (this.arr.length-num);
+              },
+              wanc:function(){
+                   /*for(var i = 0;i<this.arr.length;i++){
+                        if(this.arr[i].bol){
+                             this.arr.splice(i,1);
+                             i--;
+                        }
+                   }*/
+                   var temp = this.arr;
+                   this.arr = [];
+                   for(var i = 0;i<temp.length;i++){
+                        if(!temp[i].bol){
+                             this.arr.push(temp[i]);
+                        }
+                   }
+              }
+         },
+         directives: {
+              focus: {
+                   update: function (el) {
+                             el.focus()
+                   }
+              }
+         }
+    })
+</script>
+</body>
+</html>
