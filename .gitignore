@@ -7,7 +7,7 @@
 _roadhog-api-doc
 
 # production
-/static/build
+# /static/build
 
 # misc
 .DS_Store
