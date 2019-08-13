@@ -78,6 +78,7 @@ module.exports = {
       if (formData.username === userResult.name) {
         result.success = true
         result.message = '登录成功'
+        delete userResult.password
         result.data = userResult
       } else {
         result.success = false

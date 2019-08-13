@@ -76,21 +76,24 @@ let count = function( table ) {
   return query( _sql, [ table ] )
 }
 
-let findBlogListDataByPage = function( table, blog, start, end ) {
-  let  _sql = `SELECT * FROM ${table} WHERE title LIKE
-    "%${blog.title}%" AND type LIKE
-    "%${blog.type}%" AND content LIKE
-    "%${blog.content}%" AND create_time LIKE
-    "%${blog.create_time}%" LIMIT ${start} , ${end}`
+let findBlogListDataByPage = function( table, typeTable, blog, start, end ) {
+  let  _sql = `SELECT a.*, b.type as typeName FROM ${table} a, ${typeTable} b
+    WHERE a.title LIKE "%${blog.title}%"
+    AND a.content LIKE "%${blog.content}%"
+    AND a.del = 0
+    AND a.type = b.id
+    GROUP by a.create_time DESC
+    LIMIT ${start} , ${end}`
   return query( _sql, [] )
 }
 
 let findBlogListDataCount = function( table, blog ) {
-  let  _sql = `SELECT COUNT(*) AS total_count FROM ${table} WHERE title LIKE
-    "%${blog.title}%" AND type LIKE
-    "%${blog.type}%" AND content LIKE
-    "%${blog.content}%" AND create_time LIKE
-    "%${blog.create_time}%"`
+  let  _sql = `SELECT COUNT(*) AS total_count FROM ${table}
+    WHERE title LIKE "%${blog.title}%"
+    AND type LIKE "%${blog.type}%"
+    AND content LIKE "%${blog.content}%"
+    AND create_time LIKE "%${blog.create_time}%"
+    AND del = 0`
   return query( _sql, [] )
 }
 

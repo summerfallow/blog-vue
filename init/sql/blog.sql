@@ -8,5 +8,6 @@ CREATE TABLE IF NOT EXISTS  `blog` (
   `author` varchar(20) NOT NULL,
   `author_id` varchar(20) NOT NULL,
   `pv` int(11) DEFAULT NULL,
+  `del` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

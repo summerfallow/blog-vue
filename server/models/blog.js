@@ -27,7 +27,7 @@ const blog = {
    * @return {object}       mysql执行结果
    */
   async delete ( id ) {
-    let result = await dbUtils.deleteDataById( 'blog', id );
+    let result = await dbUtils.updateData( 'blog', {del: 1}, id );
     return result;
   },
 
@@ -47,7 +47,7 @@ const blog = {
    * @return {object}       mysql执行结果
    */
   async list ( blog, start, end ) {
-    let data = await dbUtils.findBlogListDataByPage( 'blog', blog, start, end );
+    let data = await dbUtils.findBlogListDataByPage( 'blog', 'blog_type', blog, start, end );
     let total = await dbUtils.findBlogListDataCount( 'blog', blog );
     const result = {
       data,
@@ -63,6 +63,16 @@ const blog = {
    */
   async createType ( type ) {
     let result = await dbUtils.insertData( 'blog_type', type );
+    return result;
+  },
+
+  /**
+   * 数据库新建文章类型
+   * @param  {object} model 博客数据模型
+   * @return {object}       mysql执行结果
+   */
+  async delType ( id ) {
+    let result = await dbUtils.deleteDataById( 'blog_type', id );
     return result;
   },
 

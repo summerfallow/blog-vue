@@ -16,7 +16,6 @@
 
 <script>
 import Connect from '../../utils/connect'
-import Utils from '../../utils/utils'
 import User from '../store/user'
 import md5 from 'md5'
 
@@ -47,13 +46,14 @@ export default {
             username: that.ruleForm.username,
             password: md5(that.ruleForm.password)
           }
-          Connect.getApi(10001, params, null, data => {
-            User.login(data.data)
-            Utils.setCookie('userInfo', data.data)
-            this.$message.success(data.message)
-            this.$router.push({ path: '/admin' })
-          }, error => {
-            this.$message.error(error.message)
+          Connect(10001, params, data => {
+            if (data.success) {
+              User.login(data.data)
+              this.$message.success(data.message)
+              this.$router.push({ path: '/admin' })
+            } else {
+              this.$message.error(data.message)
+            }
           })
         } else {
           console.log(valid)

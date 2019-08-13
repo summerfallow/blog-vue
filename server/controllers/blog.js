@@ -45,7 +45,7 @@ module.exports = {
    */
 
   async Edit (ctx) {
-    let formData = ctx.request.query
+    let formData = ctx.request.body
     let result = {
       success: false,
       message: '',
@@ -222,6 +222,31 @@ module.exports = {
     } else {
       result.success = false
       result.message = '获取失败'
+    }
+
+    ctx.body = result
+  },
+
+  /**
+   * 文章类型删除
+   * @param   {obejct} ctx 上下文对象
+   */
+
+  async TypeDel (ctx) {
+    let formData = ctx.request.query
+    let result = {
+      success: false,
+      message: ''
+    }
+
+    let blogResult = await blogServices.typeDel(formData.id)
+
+    if (blogResult) {
+      result.success = true
+      result.message = '删除成功'
+    } else {
+      result.success = false
+      result.message = '删除失败'
     }
 
     ctx.body = result

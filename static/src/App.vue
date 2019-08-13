@@ -5,14 +5,18 @@
 </template>
 
 <script>
-import Connect from '../utils/connect'
-import ConnectConfig from '../utils/config'
+
+import User from './store/user'
 
 export default {
   name: 'App',
   mounted: function () {
-    Connect.init(ConnectConfig)
-    this.$router.push({ path: '/login' })
+    const info = User.getInfo()
+    if (info) {
+      this.$router.push({ path: '/admin' })
+    } else {
+      this.$router.push({ path: '/login' })
+    }
   }
 }
 </script>

@@ -62,6 +62,16 @@ const blog = {
   },
 
   /**
+   * 文章类型删除
+   * @param  {object} blog 文章类型
+   * @return {object}      创建结果
+   */
+  async typeDel( id ) {
+    let result = await blogModal.delType(id);
+    return result;
+  },
+
+  /**
    * 查找文章类别信息
    * @param  {object} formData 查找的表单数据
    * @return {object|null}      查找结果

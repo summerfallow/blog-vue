@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "init_sql": "node ./init/index.js",
-    "start_server": "node ./server/app.js",
+    "server": "node ./server/app.js",
     "dev": "webpack-dev-server --inline --progress --config static/build/webpack.dev.conf.js",
     "start": "npm run dev",
     "unit": "jest --config static/test/unit/jest.conf.js --coverage",

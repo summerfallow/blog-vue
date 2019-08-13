@@ -5,20 +5,15 @@
         <el-col :span="24">
           <div class="logo">LOGO</div>
           <el-menu
-            default-active="2"
+            default-active="1"
             class="el-menu-vertical-demo"
-            @open="handleOpen"
-            @close="handleClose"
+            @select="handleClick"
             background-color="#545c64"
             text-color="#fff"
             active-text-color="#ffd04b">
             <el-menu-item index="1">
               <i class="el-icon-menu"></i>
               <span slot="title">博文管理</span>
-            </el-menu-item>
-            <el-menu-item index="2">
-              <i class="el-icon-document"></i>
-              <span slot="title">博文类型</span>
             </el-menu-item>
           </el-menu>
         </el-col>
@@ -27,10 +22,15 @@
     <el-container>
       <el-header class="header">
         <div></div>
-        <div>
-          <img src="../../assets/user_img.jpeg" />
-          <span>{{data.fullname}}</span>
-        </div>
+        <el-dropdown @command="loginout">
+          <div>
+            <img src="../../assets/user_img.jpeg" />
+            <span>{{data.fullname}}</span>
+          </div>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="loginout">退出登录</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       </el-header>
       <el-main class="main">
         <slot></slot>
@@ -41,6 +41,7 @@
 
 <script>
 import User from '../../store/user'
+import Connect from '../../../utils/connect'
 
 export default {
   data () {
@@ -55,11 +56,31 @@ export default {
     this.data.fullname = info.nick
   },
   methods: {
-    handleOpen (key, keyPath) {
-      console.log(key, keyPath)
+    // 退出登录
+    loginout (e) {
+      switch (e) {
+        case 'loginout':
+          Connect(10002, {}, data => {
+            if (data.success) {
+              this.$router.push({ path: '/login' })
+              User.clearInfo()
+            } else {
+              console.log(data.message)
+            }
+          })
+          break
+        default:
+          break
+      }
     },
-    handleClose (key, keyPath) {
-      console.log(key, keyPath)
+    handleClick (key) {
+      switch (key) {
+        case 'admin':
+          this.$router.push({ path: '/admin' })
+          break
+        default:
+          break
+      }
     }
   }
 }
