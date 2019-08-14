@@ -76,10 +76,21 @@ let count = function( table ) {
   return query( _sql, [ table ] )
 }
 
+let findBlogArchives = function( table ) {
+  let  _sql = `SELECT * FROM ${table}`
+  return query( _sql, [] )
+}
+
+let findBlogArchivesYear = function( table ) {
+  let  _sql = `SELECT year(create_time) as year FROM ${table} GROUP BY year(create_time)`
+  return query( _sql, [] )
+}
+
 let findBlogListDataByPage = function( table, typeTable, blog, start, end ) {
   let  _sql = `SELECT a.*, b.type as typeName FROM ${table} a, ${typeTable} b
     WHERE a.title LIKE "%${blog.title}%"
     AND a.content LIKE "%${blog.content}%"
+    AND a.type LIKE "%${blog.type}%"
     AND a.del = 0
     AND a.type = b.id
     GROUP by a.create_time DESC
@@ -114,5 +125,7 @@ module.exports = {
   count,
   findBlogListDataByPage,
   findBlogListDataCount,
-  findDataByTypeList
+  findDataByTypeList,
+  findBlogArchives,
+  findBlogArchivesYear
 }

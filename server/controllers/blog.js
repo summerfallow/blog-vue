@@ -29,6 +29,10 @@ module.exports = {
     })
 
     if (blogResult && blogResult.insertId * 1 > 0) {
+      const typeDetail = await blogServices.typeDetail(formData.type)
+      if (typeDetail.length) {
+        await blogServices.editType({ num: typeDetail[0].num + 1 }, formData.type)
+      }
       result.success = true
       result.message = '添加成功'
     } else {
@@ -83,6 +87,13 @@ module.exports = {
     }
 
     let blogResult = await blogServices.delete(formData.id)
+    const blogDetail = await blogServices.detail(formData.id)
+    if (blogDetail.length) {
+      const typeDetail = await blogServices.typeDetail(blogDetail[0].type)
+      if (typeDetail.length) {
+        await blogServices.editType({ num: typeDetail[0].num - 1 }, blogDetail[0].type)
+      }
+    }
 
     if (blogResult) {
       result.success = true
@@ -161,6 +172,57 @@ module.exports = {
     ctx.body = result
   },
 
+  
+  /**
+   * 文章归档
+   * @param   {obejct} ctx 上下文对象
+   */
+
+  async Archives (ctx) {
+    let result = {
+      success: false,
+      message: '',
+      data: {}
+    }
+
+    let blogResult = await blogServices.archives()
+
+    if (blogResult) {
+      result.success = true
+      result.data = blogResult.data
+    } else {
+      result.success = false
+      result.message = '读取列表失败'
+    }
+
+    ctx.body = result
+  },
+
+  /**
+   * 文章归档
+   * @param   {obejct} ctx 上下文对象
+   */
+
+  async ArchivesYear (ctx) {
+    let result = {
+      success: false,
+      message: '',
+      data: {}
+    }
+
+    let blogResult = await blogServices.archivesYear()
+
+    if (blogResult) {
+      result.success = true
+      result.data = blogResult.data
+    } else {
+      result.success = false
+      result.message = '读取列表失败'
+    }
+
+    ctx.body = result
+  },
+
   /**
    * 文章类型新增
    * @param   {obejct} ctx 上下文对象
@@ -186,7 +248,8 @@ module.exports = {
 
     let blogResult = await blogServices.createType({
       type: formData.type,
-      author_id: formData.author_id
+      author_id: formData.author_id,
+      num: 0
     })
 
     if (blogResult && blogResult.insertId * 1 > 0) {

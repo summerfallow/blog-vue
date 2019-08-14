@@ -6,7 +6,8 @@ const blog = {
    * @param  {object} model 博客数据模型
    * @return {object}       mysql执行结果
    */
-  async create ( model ) {
+  async create ( model, typeModel ) {
+    dbUtils.updateData( 'blog_type', typeModel );
     let result = await dbUtils.insertData( 'blog', model );
     return result;
   },
@@ -48,10 +49,39 @@ const blog = {
    */
   async list ( blog, start, end ) {
     let data = await dbUtils.findBlogListDataByPage( 'blog', 'blog_type', blog, start, end );
-    let total = await dbUtils.findBlogListDataCount( 'blog', blog );
+    // let total = await dbUtils.findBlogListDataCount( 'blog', blog );
     const result = {
       data,
-      total: total[0].total_count,
+      total: data.length,
+    };
+    return result;
+  },
+
+  /**
+   * 数据库文章列表
+   * @param  {object} model 博客数据模型
+   * @return {object}       mysql执行结果
+   */
+  async archives () {
+    let data = await dbUtils.findBlogArchives( 'blog' );
+    const result = {
+      data,
+      total: data.length,
+    };
+    return result;
+  },
+
+  
+  /**
+   * 数据库文章列表
+   * @param  {object} model 博客数据模型
+   * @return {object}       mysql执行结果
+   */
+  async archivesYear () {
+    let data = await dbUtils.findBlogArchivesYear( 'blog' );
+    const result = {
+      data,
+      total: data.length,
     };
     return result;
   },
@@ -67,12 +97,32 @@ const blog = {
   },
 
   /**
+   * 数据库修改文章类型
+   * @param  {object} model 博客数据模型
+   * @return {object}       mysql执行结果
+   */
+  async editType ( model, id ) {
+    let result = await dbUtils.updateData( 'blog_type', model, id );
+    return result;
+  },
+
+  /**
    * 数据库新建文章类型
    * @param  {object} model 博客数据模型
    * @return {object}       mysql执行结果
    */
   async delType ( id ) {
     let result = await dbUtils.deleteDataById( 'blog_type', id );
+    return result;
+  },
+
+  /**
+   * 数据库文章类型详情
+   * @param  {object} model 博客数据模型
+   * @return {object}       mysql执行结果
+   */
+  async typeDetail(id) {
+    let result = await dbUtils.findDataById( 'blog_type', id );
     return result;
   },
 

@@ -15,5 +15,7 @@ module.exports = {
     20007: {type: 'POST', name: '文章修改', url: '/wzq/blog/edit.do'},
     20008: {type: 'GET', name: '文章详情', url: '/wzq/blog/detail.do'},
     20009: {type: 'GET', name: '文章类型删除', url: '/wzq/blog/typeDel.do'},
+    20010: {type: 'GET', name: '获取所有文章', url: '/wzq/blog/archives.do'},
+    20011: {type: 'GET', name: '获取文章归档年份', url: '/wzq/blog/archivesYear.do'},
   },
 };

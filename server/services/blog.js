@@ -6,8 +6,8 @@ const blog = {
    * @param  {object} blog 文章内容
    * @return {object}      创建结果
    */
-  async create( blog ) {
-    let result = await blogModal.create(blog);
+  async create( blog, blogType ) {
+    let result = await blogModal.create(blog, blogType);
     return result;
   },
 
@@ -51,6 +51,27 @@ const blog = {
     return result;
   },
 
+  
+  /**
+   * 文章归档
+   * @param  {object} blog 文章列表
+   * @return {object}      创建结果
+   */
+  async archives() {
+    let result = await blogModal.archives();
+    return result;
+  },
+
+  /**
+   * 文章归档
+   * @param  {object} blog 文章归档年份
+   * @return {object}      创建结果
+   */
+  async archivesYear() {
+    let result = await blogModal.archivesYear();
+    return result;
+  },
+
   /**
    * 新建文章类型
    * @param  {object} blog 文章类型
@@ -62,6 +83,16 @@ const blog = {
   },
 
   /**
+   * 修改文章类型
+   * @param  {object} blog 文章类型
+   * @return {object}      创建结果
+   */
+  async editType( type, id ) {
+    let result = await blogModal.editType(type, id);
+    return result;
+  },
+
+  /**
    * 文章类型删除
    * @param  {object} blog 文章类型
    * @return {object}      创建结果
@@ -69,6 +100,16 @@ const blog = {
   async typeDel( id ) {
     let result = await blogModal.delType(id);
     return result;
+  },
+
+  /**
+   * 查找文章类别详情
+   * @param  {object} formData 查找的表单数据
+   * @return {object|null}      查找结果
+   */
+  async typeDetail( id ) {
+    let resultData = await blogModal.typeDetail(id);
+    return resultData;
   },
 
   /**

@@ -1,37 +1,18 @@
 <template>
   <el-container class="container">
-    <el-aside class="aside">
-      <el-row class="tac">
-        <el-col :span="24">
-          <div class="logo">LOGO</div>
-          <el-menu
-            default-active="1"
-            class="el-menu-vertical-demo"
-            @select="handleClick"
-            background-color="#545c64"
-            text-color="#fff"
-            active-text-color="#ffd04b">
-            <el-menu-item index="1">
-              <i class="el-icon-menu"></i>
-              <span slot="title">博文管理</span>
-            </el-menu-item>
-          </el-menu>
-        </el-col>
-      </el-row>
-    </el-aside>
     <el-container>
-      <el-header class="header">
-        <div></div>
-        <el-dropdown @command="loginout">
-          <div>
-            <img src="../../assets/user_img.jpeg" />
-            <span>{{data.fullname}}</span>
-          </div>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="loginout">退出登录</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-      </el-header>
+      <el-aside class="aside">
+        <div>
+          <img src="../../assets/user_img.jpeg" />
+          <span>{{data.fullname}}</span>
+        </div>
+        <div class="menu">
+          <a @click="handleClick('/')">首页</a>
+          <a @click="handleClick('/archives')">归档</a>
+          <a @click="handleClick('/tags')">标签</a>
+          <a @click="handleClick('/about')">关于</a>
+        </div>
+      </el-aside>
       <el-main class="main">
         <slot></slot>
       </el-main>
@@ -41,7 +22,7 @@
 
 <script>
 import User from '../../store/user'
-import Connect from '../../../utils/connect'
+// import Connect from '../../../utils/connect'
 
 export default {
   data () {
@@ -56,31 +37,8 @@ export default {
     this.data.fullname = info.nick
   },
   methods: {
-    // 退出登录
-    loginout (e) {
-      switch (e) {
-        case 'loginout':
-          Connect(10002, {}, data => {
-            if (data.success) {
-              this.$router.push({ path: '/login' })
-              User.clearInfo()
-            } else {
-              console.log(data.message)
-            }
-          })
-          break
-        default:
-          break
-      }
-    },
-    handleClick (key) {
-      switch (key) {
-        case 'admin':
-          this.$router.push({ path: '/admin' })
-          break
-        default:
-          break
-      }
+    handleClick: function (url) {
+      this.$router.push({ path: url })
     }
   }
 }
@@ -90,47 +48,48 @@ export default {
 .container{
   height: 100%;
 }
-.header{
+.aside{
   background-image: url('../../assets/header_bg.jpg');
   background-size: cover;
   width: 100%;
+  height: 100% !important;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  flex-direction: row;
+  flex-direction: column;
+  padding-top: 20px;
 }
-.header div{
+.aside div{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.header img{
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
+.aside img{
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
   cursor: pointer;
-  margin-right: 10px;
+  margin-bottom: 5px;
 }
-.header img:hover{
+.aside img:hover{
   box-shadow: 0 0 15px 0 #fff;
 }
-.header span{
+.aside span{
   color: #fff;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
 }
-.aside{
-  width: 300px;
-  background: rgb(84, 92, 100);
+.menu {
+  margin-top: 20px;
 }
-.logo{
-  height: 60px;
-  width: 100%;
-  background: rgb(84, 92, 100);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.menu a {
   color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.menu a:hover {
+  color: #2479CC;
 }
 </style>

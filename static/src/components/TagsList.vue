@@ -59,7 +59,8 @@ export default {
     // 获取列表
     refreshList (current = 1) {
       const { tableData } = this
-      Connect(20005, {current}, data => {
+      const { id } = this.$route.query
+      Connect(20005, {current, type: id}, data => {
         if (data.success) {
           tableData['data'] = data.data
           tableData['current'] = Number(data.current)

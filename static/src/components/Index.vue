@@ -96,7 +96,7 @@
 import moment from 'moment'
 import Connect from '../../utils/connect'
 import editor from './component/editor.vue'
-import page from './component/Page.vue'
+import page from './component/AdminPage.vue'
 import User from '../store/user'
 
 export default {
@@ -268,7 +268,6 @@ export default {
     },
     // 删除文章类型
     handleRemoveType (id) {
-      console.log(id)
       this.$confirm('是否删除此类型?', '', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',

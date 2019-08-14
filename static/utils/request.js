@@ -2,6 +2,7 @@
 // import fetch from 'fetch'
 import qs from 'qs'
 import { Notification } from 'element-ui'
+import User from '../src/store/user'
 
 const codeMessage = {
   200: '服务器成功返回请求的数据',
@@ -65,12 +66,14 @@ export default function request(api, params) {
     .then(checkStatus)
     .then((response) => {
       const json = eval(`(${response})`);
-      // if (json.msg === '登陆超时，请重新登陆') {
-      //   message.error('登录失效，正在跳转至登录页...')
-      //   localStorage.removeItem('antd-pro-authority')
-      //   localStorage.removeItem('userId')
-      //   location.href = '/'
-      // }
+      if (json.message === '请重新登录') {
+        Notification.success({
+          title: '',
+          message: '登录失效，正在跳转至登录页...'
+        })
+        User.clearInfo()
+        location.href = '/'
+      }
       return json
     })
 }
