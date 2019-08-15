@@ -7,6 +7,7 @@
       </div>
       <div class="content" v-html="detailData.content"></div>
     </div>
+    <footers></footers>
   </page>
 </template>
 
@@ -14,11 +15,13 @@
 import moment from 'moment'
 import Connect from '../../utils/connect'
 import page from './component/Page.vue'
+import footers from './component/Footer'
 
 export default {
   name: 'List',
   components: {
-    page
+    page,
+    footers
   },
   data () {
     return {
