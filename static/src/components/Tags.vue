@@ -9,17 +9,20 @@
         <span @click="handleClick(item)">{{ item.type }}({{ item.num || 0 }})</span>
       </el-tag>
     </div>
+    <footers></footers>
   </page>
 </template>
 
 <script>
 import Connect from '../../utils/connect'
 import page from './component/Page.vue'
+import footers from './component/Footer'
 
 export default {
   name: 'List',
   components: {
-    page
+    page,
+    footers
   },
   data () {
     return {
@@ -55,7 +58,7 @@ export default {
     width: 100%;
     height: auto;
     margin: 0 auto;
-    padding: 0 30px;
+    padding: 0 20px;
     box-sizing: border-box;
   }
   .title {

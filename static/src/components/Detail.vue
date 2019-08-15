@@ -59,7 +59,7 @@ export default {
     width: 100%;
     height: auto;
     margin: 0 auto;
-    padding: 0 30px;
+    padding: 0 20px;
     box-sizing: border-box;
   }
   .title {

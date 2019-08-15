@@ -13,9 +13,9 @@
           <a @click="handleClick('/about')">关于</a>
         </div>
       </el-aside>
-      <el-main class="main">
-        <slot></slot>
-      </el-main>
+      <el-container>
+        <el-main class="main"><slot></slot></el-main>
+      </el-container>
     </el-container>
   </el-container>
 </template>
@@ -28,7 +28,7 @@ export default {
   data () {
     return {
       data: {
-        fullname: ''
+        fullname: '秋也'
       }
     }
   },

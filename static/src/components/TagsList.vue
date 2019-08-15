@@ -22,6 +22,7 @@
         </el-pagination>
       </div>
     </div>
+    <footers></footers>
   </page>
 </template>
 
@@ -29,11 +30,13 @@
 import moment from 'moment'
 import Connect from '../../utils/connect'
 import page from './component/Page.vue'
+import footers from './component/Footer'
 
 export default {
   name: 'List',
   components: {
-    page
+    page,
+    footers
   },
   data () {
     return {
@@ -88,9 +91,11 @@ export default {
 
 <style scoped>
   .main {
-    width: 1080px;
+    width: 100%;
     height: auto;
     margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
   }
   .blogBox {
     margin: 0;
@@ -102,6 +107,9 @@ export default {
     padding: 0;
     border-bottom: 1px dashed #ccc;
     padding-bottom: 20px;
+  }
+  .blogBox li:last-child {
+    border-bottom: 0 none;
   }
   .title {
     display: flex;
