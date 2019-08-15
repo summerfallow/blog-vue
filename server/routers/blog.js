@@ -10,7 +10,7 @@ const routers = router.post('/add.do', userControllers.isLogin, blogControllers.
   .get('/archives.do', blogControllers.Archives)
   .get('/archivesYear.do', blogControllers.ArchivesYear)
   .post('/typeAdd.do', userControllers.isLogin, blogControllers.TypeAdd)
-  .get('/typeList.do', userControllers.isLogin, blogControllers.TypeList)
+  .get('/typeList.do', blogControllers.TypeList)
   .get('/typeDel.do', userControllers.isLogin, blogControllers.TypeDel)
   .post('/upload-file.do', blogControllers.UploadFile);
 

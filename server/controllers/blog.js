@@ -269,14 +269,13 @@ module.exports = {
    */
 
   async TypeList (ctx) {
-    let formData = ctx.request.body
     let result = {
       success: false,
       message: '',
       data: []
     }
 
-    let blogResult = await blogServices.typeList(ctx.session.userId)
+    let blogResult = await blogServices.typeList()
 
     if (blogResult) {
       result.success = true

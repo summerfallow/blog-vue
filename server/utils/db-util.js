@@ -87,10 +87,11 @@ let findBlogArchivesYear = function( table ) {
 }
 
 let findBlogListDataByPage = function( table, typeTable, blog, start, end ) {
+  const type = blog.type ? `AND a.type = ${blog.type}` : ''
   let  _sql = `SELECT a.*, b.type as typeName FROM ${table} a, ${typeTable} b
     WHERE a.title LIKE "%${blog.title}%"
     AND a.content LIKE "%${blog.content}%"
-    AND a.type LIKE "%${blog.type}%"
+    ${type}
     AND a.del = 0
     AND a.type = b.id
     GROUP by a.create_time DESC
@@ -109,8 +110,8 @@ let findBlogListDataCount = function( table, blog ) {
 }
 
 let findDataByTypeList = function( table,  id ) {
-  let  _sql =  "SELECT * FROM ?? WHERE author_id = ? "
-  return query( _sql, [ table, id ] )
+  let  _sql =  "SELECT * FROM ??"
+  return query( _sql, [ table ] )
 }
 
 module.exports = {

@@ -88,7 +88,6 @@ export default {
         data.push({ month: month.reverse(), year })
       })
       const arr = data.reverse()
-      console.log(arr)
       this.listData = arr
     },
     handleClick: function (url) {

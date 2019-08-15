@@ -130,8 +130,8 @@ const blog = {
    * @param  {object} blog 文章类型列表
    * @return {object}      创建结果
    */
-  async typeList( id ) {
-    let result = await blogModal.typeList(id);
+  async typeList() {
+    let result = await blogModal.typeList();
     return result;
   },
 

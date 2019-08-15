@@ -150,8 +150,8 @@ const blog = {
    * @param  {object} model 博客数据模型
    * @return {object}       mysql执行结果
    */
-  async typeList ( id ) {
-    let result = await dbUtils.findDataByTypeList( 'blog_type', id );
+  async typeList () {
+    let result = await dbUtils.findDataByTypeList( 'blog_type' );
     return result;
   },
 

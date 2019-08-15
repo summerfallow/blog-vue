@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import User from '../../store/user'
+// import User from '../../store/user'
 // import Connect from '../../../utils/connect'
 
 export default {
@@ -32,10 +32,7 @@ export default {
       }
     }
   },
-  mounted: function () {
-    const info = User.getInfo()
-    this.data.fullname = info.nick
-  },
+  mounted: function () {},
   methods: {
     handleClick: function (url) {
       this.$router.push({ path: url })
