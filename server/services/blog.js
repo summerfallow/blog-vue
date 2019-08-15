@@ -135,6 +135,36 @@ const blog = {
     return result;
   },
 
+  /**
+   * 判断ip是否存在
+   * @param  {object} formData 判断ip是否存在
+   * @return {object|null}      查找结果
+   */
+  async getExistIpOne( ip ) {
+    let resultData = await blogModal.getExistIpOne(ip);
+    return resultData;
+  },
+
+  /**
+   * 记录IP访问次数
+   * @param  {object} formData 记录IP访问次数
+   * @return {object|null}      查找结果
+   */
+  async updateIp( model, id ) {
+    let resultData = await blogModal.updateIp(model, id);
+    return resultData;
+  },
+
+  /**
+   * 新建IP记录
+   * @param  {object} formData 新建IP记录
+   * @return {object|null}      查找结果
+   */
+  async createIp( model ) {
+    let resultData = await blogModal.createIp(model);
+    return resultData;
+  },
+
 };
 
 module.exports = blog;

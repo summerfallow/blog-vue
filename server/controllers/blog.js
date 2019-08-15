@@ -151,11 +151,8 @@ module.exports = {
    */
 
   async List (ctx) {
-    console.log(ctx.request.headers)
-    const req = ctx.req.headers
-    console.log(req)
-    // const getIp = req.header['referer'] || req.headers['x-real-ip']
-    // console.log(getIp)
+    const req = ctx.request
+    const ip = req.headers['x-forwarded-for'] || req.headers['x-real-ip']
     let formData = ctx.request.query
     let result = {
       success: false,
@@ -172,6 +169,13 @@ module.exports = {
       content: formData.content || '',
       create_time: formData.create || ''
     }, (current - 1) * pageSize, pageSize)
+    if (ip) {
+      if (existOne) {
+        await blogServices.updateIp({ pv: existOne.pv + 1 }, existOne.id)
+      } else {
+        await blogServices.createIp({ ip })
+      }
+    }
 
     if (blogResult) {
       result.success = true

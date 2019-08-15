@@ -155,6 +155,41 @@ const blog = {
     return result;
   },
 
+  /**
+   * 查询ip是否存在
+   * @param  {obejct} options 查询ip是否存在
+   * @return {object|null}        查找结果
+   */
+  async getExistIpOne(ip) {
+    let result = await dbUtils.findDataById( 'ip_log', ip );
+    if ( Array.isArray(result) && result.length > 0 ) {
+      result = result[0];
+    } else {
+      result = null;
+    }
+    return result;
+  },
+
+  /**
+   * 记录IP访问次数
+   * @param  {object} model 记录IP访问次数
+   * @return {object}       mysql执行结果
+   */
+  async updateIp( model, id ) {
+    let result = await dbUtils.updateData( 'ip_log', model, id );
+    return result;
+  },
+
+  /**
+   * 新建IP记录
+   * @param  {object} model 新建IP记录
+   * @return {object}       mysql执行结果
+   */
+  async createIp( model ) {
+    let result = await dbUtils.insertData( 'ip_log', model );
+    return result;
+  },
+
 };
 
 module.exports = blog;
