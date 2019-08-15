@@ -41,6 +41,11 @@ let findDataById = function( table,  id ) {
   return query( _sql, [ table, id ] )
 }
 
+let findDataByIp = function( table,  ip ) {
+  let  _sql =  "SELECT * FROM ?? WHERE ip = ? "
+  return query( _sql, [ table, ip ] )
+}
+
 
 let findDataByPage = function( table, keys, start, end ) {
   let  _sql =  "SELECT ?? FROM ??  LIMIT ? , ?"
@@ -118,6 +123,7 @@ module.exports = {
   query,
   createTable,
   findDataById,
+  findDataByIp,
   findDataByPage,
   deleteDataById,
   insertData,

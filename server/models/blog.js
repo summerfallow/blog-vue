@@ -161,7 +161,7 @@ const blog = {
    * @return {object|null}        查找结果
    */
   async getExistIpOne(ip) {
-    let result = await dbUtils.findDataById( 'ip_log', ip );
+    let result = await dbUtils.findDataByIp( 'ip_log', ip );
     if ( Array.isArray(result) && result.length > 0 ) {
       result = result[0];
     } else {
