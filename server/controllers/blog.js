@@ -170,6 +170,7 @@ module.exports = {
       create_time: formData.create || ''
     }, (current - 1) * pageSize, pageSize)
     if (ip) {
+      const existOne = await blogServices.getExistIpOne(ip)
       if (existOne) {
         await blogServices.updateIp({ pv: existOne.pv + 1 }, existOne.id)
       } else {
