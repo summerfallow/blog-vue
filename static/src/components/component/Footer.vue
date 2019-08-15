@@ -1,6 +1,7 @@
 <template>
   <div class="footer">
-    © {{ date }} -  秋也  - <a href="/">wzqblog.cn</a> 
+    <span>© {{ date }} -  秋也  - </span>
+    <a href="/">wzqblog.cn</a>
     <a href="https://github.com/summerfallow" target="_blank"><img alt="" src="../../assets/fluidicon.png" /></a>
   </div>
 </template>
