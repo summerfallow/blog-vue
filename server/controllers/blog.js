@@ -136,11 +136,26 @@ module.exports = {
   },
 
   /**
+   * 获取IP
+   * @param   {obejct} ctx 上下文对象
+   */
+
+  getClientIP (req) {
+    return req.headers['x-forwarded-for'] || // 判断是否有反向代理 IP
+      req.headers['x-real-ip']
+  },
+
+  /**
    * 文章列表
    * @param   {obejct} ctx 上下文对象
    */
 
   async List (ctx) {
+    console.log(ctx.request.headers)
+    const req = ctx.req.headers
+    console.log(req)
+    // const getIp = req.header['referer'] || req.headers['x-real-ip']
+    // console.log(getIp)
     let formData = ctx.request.query
     let result = {
       success: false,
