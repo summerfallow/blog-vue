@@ -35,7 +35,7 @@
     "koa-views": "^6.1.4",
     "moment": "^2.22.1",
     "mysql": "^2.15.0",
-    "open": "^0.0.5",
+    "open": "^7.0.0",
     "validator": "^9.4.1",
     "vue": "^2.5.2",
     "vue-quill-editor": "^3.0.6",
